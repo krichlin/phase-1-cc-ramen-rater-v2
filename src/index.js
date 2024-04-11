@@ -5,15 +5,44 @@
 
 const addSubmitListener = () => { 
 
-  // attach a submit event listener to the "new-ramen" form using a
-  //  function called addSubmitLIstener.
+    // attach a submit event listener to the "new-ramen" form using a
+    //  function called addSubmitLIstener.
+
+  const newRamenForm = document.querySelector('#new-ramen') 
+
+  newRamenForm.addEventListener('submit', (e) => handleSubmit(e))
+  // console.log('newRamenForm', newRamenForm)
 
   // After the submission, create a new ramen
   // and add it to the #ramen-menu div
   // should be nonpersistent
-
 }
 
+const handleSubmit = (e) => {
+
+  e.preventDefault()
+  // console.log(e)
+  // console.log("e.target", e.target)
+
+  const menu_div = document.querySelector("#ramen-menu")
+  // console.log('menu_div', menu_div)
+
+  // Now loop through the ramenContainer with forEach() method
+  // and use appendChild()  to write each element to the dom.
+
+    const newRamenImg = document.createElement('img')
+    newRamenImg.src = e.target.image.value
+    newRamenImg.name = e.target.name.value
+    newRamenImg.alt = e.target.restaurant.value
+
+    //    not here and not yet
+    //    newRamenImg.restaurant = ramen.restaurant
+    //    newRamenImg.rating = ramen.rating
+
+    // console.log('newRamenImg', newRamenImg)
+    menu_div.appendChild(newRamenImg) // Apply the image to the document 
+
+}
 const addClickListener = () => {
   
   // First add an event listener to a (each?) picture in ramen-menu.
@@ -49,11 +78,13 @@ const handleClick = (e) => {
   var img = detailView.querySelector('.detail-image')
   var name = detailView.querySelector('.name')
   var restaurant = detailView.querySelector('.restaurant')
+  var rating = document.querySelector('.rating-display')
+  var comment = document.querySelector('.comment-display')
 
-  // console.log("img", img)
-  // console.log("name", name)
-  // console.log("restaurant", restaurant)
-  // console.log("detailview", detailView)
+  // display the rating and comment here
+
+  // rating = 
+  // comment = 
 
   // create a new img, h2 and h3 tags floating in space
   
@@ -61,7 +92,13 @@ const handleClick = (e) => {
   var newH2 = document.createElement('h2')
   var newH3 = document.createElement('h3')
 
+
   // now populate them with the data
+
+  // when you click on an image from ramen menu, this callback fires
+  // to see all the info about that ramen displayed inside the
+  // #ramen-detail div (where it says insert comment here and insert
+  // rating here )
 
   newImg.src = e.target.src
   newImg.classList = 'detail-image'
@@ -70,11 +107,25 @@ const handleClick = (e) => {
   newH3.textContent = e.target.alt
   newH3.classList = 'restaurant'
 
-  // let's see them
+  console.log('e',e)
 
-  // console.log("newImg", newImg)
-  // console.log("newH2", newH2)
-  // console.log("newH3", newH3)
+  var newRating = document.createElement('p')
+  var newComment = document.createElement('p')
+
+  // populate them with the correct classes
+
+  // newRating.classList = 'rating-display'
+  // newComment.classList = 'comment-display'
+
+  //newRating.textContent = 
+  //newComment.textContent = 
+
+
+  // now populate them with the correct data
+
+  // newRating.textContent = e.
+  // newComment.textContent = e.
+
 
   // Let's remove the 3 children of the div
 
@@ -104,38 +155,7 @@ const handleClick = (e) => {
   // detailView.h2 = e.target.name
   // detailView.h3 = e.target.alt
 
-  // Now overwrite the key elements from the event to that part of the dom.
-
-  // Let's use INNERHTML since nothing else seems to be working.
-
-  //detailView.innerHTML = `
-  //                     <img class="detail-image" src="${img}" alt="${img.alt}" />
-  //                     <h2 class="name">${name}</h2>
-  //                     <h3 class="restaurant">${restaurant}</h3>
-  //                      `
-
-  // OK That didn't work
-
-  // Take the IMG tag we clicked on and populate it ?
-  // Second grab a fresh copy from API with a GET fetch()
-  // Third 
-  
-  // function() {}
-  // write a callback function named cbtwo such that
-  // when you click on an image from ramen menu, this callback fires
-  // to see all the info about that ramen displayed inside the
-  // #ramen-detail div (where it says insert comment here and insert
-  // rating here )
-
-  // change the content of the div with id #ramen-detail
-  // grab that div 
-
-  const ramenDetail = document.querySelector('#ramen-detail')
-
-  // now change the img
-  // now change the h2 with the name
-  // now change the h3 with the restaurant name
-  // yer done?
+  // const ramenDetail = document.querySelector('#ramen-detail')
 
 };
 
