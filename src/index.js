@@ -5,23 +5,24 @@
 
 const addSubmitListener = () => { 
 
-    // attach a submit event listener to the "new-ramen" form using a
-    //  function called addSubmitLIstener.
+  // attach a submit event listener to the "new-ramen" form using a   //
+  //  function called addSubmitLIstener.                              //
 
   const newRamenForm = document.querySelector('#new-ramen') 
 
   newRamenForm.addEventListener('submit', (e) => handleSubmit(e))
-  // console.log('newRamenForm', newRamenForm)
 
-  // After the submission, create a new ramen
-  // and add it to the #ramen-menu div
-  // should be nonpersistent
+  // console.log('newRamenForm', newRamenForm)                      //
 }
 
 const handleSubmit = (e) => {
 
-  e.preventDefault()
-  // console.log(e)
+  // After the submission, create a new ramen and add it to the #ramen-menu div
+  // should be nonpersistent
+
+  e.preventDefault()                       // Don't reload the page on submit
+
+  // console.log("e",e)
   // console.log("e.target", e.target)
 
   const menu_div = document.querySelector("#ramen-menu")
@@ -35,22 +36,17 @@ const handleSubmit = (e) => {
     newRamenImg.name = e.target.name.value
     newRamenImg.alt = e.target.restaurant.value
 
-    //    not here and not yet
-    //    newRamenImg.restaurant = ramen.restaurant
-    //    newRamenImg.rating = ramen.rating
-
-    // console.log('newRamenImg', newRamenImg)
     menu_div.appendChild(newRamenImg) // Apply the image to the document 
 
+    // Update the Rating and Comment if we ever figure out how
 }
 const addClickListener = () => {
   
-  // First add an event listener to a (each?) picture in ramen-menu.
-  // maybe we can attach it to the whole div?  
+  // First add an event listener to a (each?) picture in ramen-menu div.
 
   const theMenuDiv = document.querySelector('#ramen-menu')
 
-  // that event listner should fire handleClick()
+  // that event listner should fire callback handleClick() send it event
 
   theMenuDiv.addEventListener('click', (e) => handleClick(e))
 
@@ -59,39 +55,27 @@ const addClickListener = () => {
 const handleClick = (e) => {
 
   // console.log('handleClick called') // Check event listener
-  // let's see what we get inside e
+  console.log("e.target", e.target)
 
-  // console.log("e", e)
-
-  // console.log("e.target", e.target)
-
-  // console.log("e.target.src", e.target.src)       // image URL
-  // console.log("e.target.name", e.target.name)      // ramen name
-  // console.log ("e.target.alt", e.target.alt)      // ramen restaurant stored in alt field.
-
-  // grab the key parts from the event and save them into variable
+  // console.log("e.target.src", e.target.src)    // image URL
+  // console.log("e.target.name", e.target.name)  // ramen name
+  // console.log ("e.target.alt", e.target.alt)   // ramen restaurant stored in alt field.
 
   // great let's grab the piece of the DOM we are writing to
 
   const detailView = document.querySelector('#ramen-detail')
 
+  // const ramenDetail = document.querySelector('#ramen-detail') (old name)
+
   var img = detailView.querySelector('.detail-image')
   var name = detailView.querySelector('.name')
   var restaurant = detailView.querySelector('.restaurant')
-  var rating = document.querySelector('.rating-display')
-  var comment = document.querySelector('.comment-display')
 
-  // display the rating and comment here
-
-  // rating = 
-  // comment = 
-
-  // create a new img, h2 and h3 tags floating in space
+  // create new img h2 and h3 elements
   
   var newImg = document.createElement('img')
   var newH2 = document.createElement('h2')
   var newH3 = document.createElement('h3')
-
 
   // now populate them with the data
 
@@ -100,6 +84,8 @@ const handleClick = (e) => {
   // #ramen-detail div (where it says insert comment here and insert
   // rating here )
 
+  // build out the new objects
+
   newImg.src = e.target.src
   newImg.classList = 'detail-image'
   newH2.textContent = e.target.name
@@ -107,27 +93,43 @@ const handleClick = (e) => {
   newH3.textContent = e.target.alt
   newH3.classList = 'restaurant'
 
-  console.log('e',e)
+  // Maybe here we can add the rating and comment to the img tag as metadata?
 
-  var newRating = document.createElement('p')
-  var newComment = document.createElement('p')
+  newImg.title = '5'
+
+  console.log("newImg",newImg)
+  newImg.comment = 'meh'
 
   // populate them with the correct classes
 
-  // newRating.classList = 'rating-display'
-  // newComment.classList = 'comment-display'
-
-  //newRating.textContent = 
-  //newComment.textContent = 
-
-
   // now populate them with the correct data
 
-  // newRating.textContent = e.
-  // newComment.textContent = e.
+  //Now we update rating and comment
+
+  // Grab the 2 parts of the dom we want to populate:
+
+  var rating = document.querySelector('#rating-display')
+  var comment = document.querySelector('#comment-display')
+
+  console.log(rating.textContent)
+  console.log(comment.textContent)
+
+  console.log("rating", rating)
+  console.log("comment", comment)
+  
+  // newImg.rating = rating
+  // newImg.comment = comment
+
+  console.log("newImg", newImg)
+
+  // Got the ratings, now somehow put them as children of the img tag?
+
+  //console.log('detailView', detailView)  // that's the one
+
+  //console.log(detailView.img)
 
 
-  // Let's remove the 3 children of the div
+  // Let's remove the 3 children of the original div
 
   img.remove()
   name.remove()
@@ -139,23 +141,7 @@ const handleClick = (e) => {
   detailView.appendChild(newH2)
   detailView.appendChild(newH3)
 
-  //console.log('detailView', detailView)  // that's the one
-
-  //console.log(detailView.img)
-
-  // img = e.target.src
-  // name = e.target.name
-  // restaurant = e.target.alt
-
-  // detailView.appendChild(img)
-  // detailView.appendChild(name)
-  // detailView.appendChild(restaurant)
-
-  // detailView.img.src = e.target.src
-  // detailView.h2 = e.target.name
-  // detailView.h3 = e.target.alt
-
-  // const ramenDetail = document.querySelector('#ramen-detail')
+  // That finishes populating the image.
 
 };
 
@@ -165,7 +151,6 @@ const displayRamens = () => {
      fetch("http://localhost:3000/ramens")
      .then((resp) => resp.json())
      .then((data) => cbone(data))
-
 }
 
 function cbone (data) {  // Callback function for displayRamens()
@@ -195,12 +180,16 @@ function cbone (data) {  // Callback function for displayRamens()
     newRamenImg.alt = ramen.restaurant
 
     //    not here and not yet
-    //    newRamenImg.restaurant = ramen.restaurant
-    //    newRamenImg.rating = ramen.rating
+    console.log("ramen.rating", ramen.rating)
+    console.log("ramen.comment", ramen.comment)
 
-    // console.log('newRamenImg', newRamenImg)
+    newRamenImg.rating = ramen.rating
+    newRamenImg.comment = ramen.comment
+
+    console.log('newRamenImg', newRamenImg)
+    // console.log('newRamenImg.rating', new)
+
     menu_div.appendChild(newRamenImg) // Apply the image to the document 
-
     }
   )
 }
